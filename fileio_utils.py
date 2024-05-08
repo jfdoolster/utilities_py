@@ -18,20 +18,23 @@ def absolute_path(path: str, unix_style=True) -> str:
         return unix_path(_path)
     return _path
 
-def get_directory_files(directory: str, wildcard='*'):
+def get_directory_files(directory: str, wildcard='*', unix_style=True):
     dir = absolute_path(directory)
     if not os.path.isdir(dir):
         print(f"{dir:s} does not exist")
         return list()
-    return sorted(glob.glob(f"{dir:s}/{wildcard}"))
+    files = sorted(glob.glob(os.path.join(dir, wildcard)))
+    if unix_style:
+        files = [unix_path(f) for f in files]
+    return files
 
 if __name__ == "__main__":
-    path = '../../Documents/jfd_logs'
+    path = '../../Documents/jfd_vault'
     print(unix_path(path))
     print(absolute_path(path, True))
     print(get_directory_files(path, wildcard="*"))
     print()
-    path = '$HOME/Documents/jfd_logs'
+    path = '$HOME/Documents/jfd_vault'
     print(unix_path(path))
     print(absolute_path(path, True))
     print(get_directory_files(path, wildcard="*"))
