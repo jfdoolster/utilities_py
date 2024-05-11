@@ -1,3 +1,4 @@
+import datetime
 import numpy as np
 import pandas as pd
 
@@ -22,6 +23,8 @@ def show_timedelta(time_initial:str, time_final: str, ret='sec'):
 
     return seconds
 
+def current_timestamp_str():
+    return str(datetime.datetime.now())
 
 if __name__ == "__main__":
     from datetime import datetime
