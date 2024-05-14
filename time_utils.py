@@ -26,6 +26,20 @@ def show_timedelta(time_initial:str, time_final: str, ret='sec'):
 def current_timestamp_str():
     return str(datetime.datetime.now())
 
+def localize_df(df0: pd.DataFrame, timezone_str: str) -> pd.DataFrame:
+    try:
+        df0['Timestamp'] = pd.DatetimeIndex(df0['Timestamp']).tz_localize(timezone_str)
+    except TypeError:
+        df0['Timestamp'] = pd.DatetimeIndex(df0['Timestamp']).tz_convert(timezone_str)
+
+    # todo: i hate this
+    try:
+        df0['Timestamp_UTC'] = pd.DatetimeIndex(df0['Timestamp']).tz_localize('UTC')
+    except TypeError:
+        df0['Timestamp_UTC'] = pd.DatetimeIndex(df0['Timestamp']).tz_convert('UTC')
+
+    return df0
+
 if __name__ == "__main__":
     from datetime import datetime
 
