@@ -36,12 +36,22 @@ def polynomial_regression(x_arr: np.ndarray, y_arr: np.ndarray, power=1, force_z
 
     return beta, yhat
 
-def calc_Rsquared(ydata: np.ndarray, yhat:np.ndarray):
+def calc_Rsquared(y_data: np.ndarray, y_hat:np.ndarray):
     # https://en.wikipedia.org/wiki/Partition_of_sums_of_squares
-    ESS = sum((yhat - np.mean(ydata))**2)
-    RSS = sum((ydata - yhat)**2)
-    TSS = ESS + RSS
-    R2 = 1 - (RSS/TSS)
-    return R2
+    y_bar:float = np.sum(y_data)/len(y_data)
+    ssreg:float = np.sum((y_hat  - y_bar)**2)
+    ssres:float = np.sum((y_hat - y_bar)**2)
+    sstot:float = np.sum((y_data - y_bar)**2)
+    return float((ssreg/sstot))
+
+
+    #ESS:float = np.sum(np.square(y_hat  - y_bar))
+    #TSS:float = np.sum(np.square(y_data - y_bar))
+    #RSS:float = np.sum(np.square(y_data - y_hat))
+    #Stot:float = ESS + RSS
+    #Sres:float = RSS
+    #print(TSS, Stot)
+    #R2:float = 1 - (Sres/Stot)
+    #return R2
 
 
