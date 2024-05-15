@@ -1,7 +1,11 @@
+import os, sys
+parent = os.path.abspath(os.path.join(os.path.dirname(__file__), '.')).replace(os.sep, '/')
+if parent not in sys.path:
+    sys.path.append(parent)
 
-import os
 import matplotlib.pyplot as plt
 from itertools import cycle
+from log_utils import WARNING, INFO
 
 def make_iterator(prop_cycle:list):
     return cycle(prop_cycle)
@@ -27,11 +31,11 @@ def fig2png(fig:plt.Figure, png_path:str, display:bool=True):
     _path = os.path.abspath(png_path).replace(os.sep, '/')
     _path = f"{os.path.splitext(_path)[0]:s}.png"
     if not os.path.isdir(os.path.dirname(_path)):
-        print(f"{'WARN':5s} : [fig2png()] {os.path.dirname(_path):s} does not exist. PNG was not saved.")
+        WARNING(f"{os.path.dirname(_path):s} does not exist. PNG was not saved.")
         return _path
     fig.savefig(_path, format='png')
     if display:
-        print(f"{'PNG':5s} : {_path}")
+        INFO(f"{_path:s}", TYPE="PNG", show_func=False)
     return _path
 
 
