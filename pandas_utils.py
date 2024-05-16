@@ -1,7 +1,8 @@
+
 import os, sys
-parent = os.path.abspath(os.path.join(os.path.dirname(__file__), '.')).replace(os.sep, '/')
-if parent not in sys.path:
-    sys.path.append(parent)
+syspath = os.path.abspath(os.path.join(os.path.dirname(__file__), '.')).replace(os.sep, '/')
+if syspath not in sys.path:
+    sys.path.append(syspath)
 
 import pandas as pd
 from log_utils import WARNING, INFO
