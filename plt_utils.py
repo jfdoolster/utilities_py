@@ -59,4 +59,40 @@ def fig2png(fig:plt.Figure, png_path:str, display:bool=True):
     return _path
 
 
+def match_2d_axis_limits(ax: plt.Axes, xVy=1.0, loops=20):
+    # todo: correct this!
+    (x_min,x_max) = ax.get_xlim()
+    (y_min,y_max) = ax.get_ylim()
+
+    x_bot, x_top = x_min, x_max
+    yx_bot, yx_top = y_min*xVy, y_max*xVy
+
+    x_range = abs(x_top - x_bot)
+    yx_range = abs(yx_top - yx_bot)
+
+    counter=0
+    while (x_range != yx_range) and counter < loops:
+        diff = abs(x_range - yx_range)
+        if x_range > (yx_range):
+            yx_bot = yx_bot - (diff/2.0)
+            yx_top = yx_top + (diff/2.0)
+        if x_range < (yx_range*xVy):
+            x_bot = x_min - (diff/2.0)
+            x_top = x_max + (diff/2.0)
+
+        x_range = (x_top - x_bot)
+        yx_range = (yx_top - yx_bot)
+        counter +=1
+
+    if counter == loops:
+        print(f"WARN [match_horizontal_limits()]:  plot limits miss-match ({x_range}) != ({yx_range})")
+
+    y_top = yx_top/xVy
+    y_bot = yx_bot/xVy
+
+    ax.set_xlim(left = x_bot)
+    ax.set_xlim(right = x_top)
+    ax.set_ylim(bottom = y_bot)
+    ax.set_ylim(top = y_top)
+
 
