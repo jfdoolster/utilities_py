@@ -55,7 +55,7 @@ def fig2png(fig:plt.Figure, png_path:str, display:bool=True):
         return _path
     fig.savefig(_path, format='png')
     if display:
-        INFO(f"{_path:s}", TYPE="PNG", show_func=False)
+        INFO(f"{_path:s}", hdr="PNG", show_func=False)
     return _path
 
 

@@ -15,7 +15,7 @@ def df2csv(df0: pd.DataFrame, csv_path: str, display=True, float_format=None) ->
         return _path
     df0.to_csv(_path, index=False, float_format=float_format)
     if display:
-        INFO(f"{_path:s}", TYPE='CSV', show_func=False)
+        INFO(f"{_path:s}", hdr='CSV', show_func=False)
     return _path
 
 def df2print(df0:pd.DataFrame, precision=2):
