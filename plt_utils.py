@@ -8,29 +8,19 @@ from itertools import cycle
 from log_utils import WARNING, INFO
 
 def set_custom_rcparams():
-    """
-    custom rcparams
-    """
-    ## Set the grid info
-    plt.rcParams['axes.grid']
+    plt.rcParams['axes.grid'] = True
     plt.rcParams['grid.alpha'] = 0.3
     plt.rcParams['axes.axisbelow'] = True
-    # Set inverse colorscheme
-    plt.rcParams['image.cmap'] = 'viridis_r'
-    ## Set the global fontsize
+    #plt.rcParams['image.cmap'] = 'viridis_r'
     plt.rc('font', size=12)
-    ## Set the axes title font size
-    plt.rc('axes', titlesize=16)
-    ## Set the axes labels font size
-    plt.rc('axes', labelsize=14)
-    ## Set the font size for x tick labels
-    plt.rc('xtick', labelsize=12)
-    ## Set the font size for y tick labels
-    plt.rc('ytick', labelsize=12)
-    ## Set the legend font size
-    plt.rc('legend', fontsize=10)
-    ## Set the font size of the figure title
     plt.rc('figure', titlesize=16)
+    plt.rc('figure', labelsize=14)
+    plt.rc('axes', titlesize=14)
+    plt.rc('axes', labelsize=14)
+    plt.rc('xtick', labelsize=12)
+    plt.rc('ytick', labelsize=12)
+    plt.rc('legend', fontsize=12)
+
 
 def make_iterator(prop_cycle:list):
     return cycle(prop_cycle)
