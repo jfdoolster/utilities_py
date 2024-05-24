@@ -26,6 +26,15 @@ def show_timedelta(time_initial:str, time_final: str, ret='sec'):
 def current_timestamp_str():
     return str(datetime.datetime.now())
 
+def shift_timestamp_forward(df0: pd.DataFrame, seconds=0, minutes=0, hours=0, days=0, timestamp_col='Timestamp'):
+    df = df0.copy()
+    df[timestamp_col] = df[timestamp_col] + \
+                        pd.to_timedelta(seconds, unit='sec') + \
+                        pd.to_timedelta(minutes, unit='min') + \
+                        pd.to_timedelta(minutes, unit='hour') + \
+                        pd.to_timedelta(days, unit='days')
+    return df
+
 def localize_df(df0: pd.DataFrame, timezone_str: str) -> pd.DataFrame:
     try:
         df0['Timestamp'] = pd.DatetimeIndex(df0['Timestamp']).tz_localize(timezone_str)
