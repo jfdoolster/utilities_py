@@ -6,9 +6,10 @@ if syspath not in sys.path:
 
 import pandas as pd
 from log_utils import WARNING, INFO
+from fileio_utils import absolute_path
 
 def df2csv(df0: pd.DataFrame, csv_path: str, display=True, float_format=None) -> str:
-    _path = os.path.abspath(csv_path).replace(os.sep, '/')
+    _path = absolute_path(csv_path)
     _path = f"{os.path.splitext(_path)[0]}.csv"
     if not os.path.isdir(os.path.dirname(_path)):
         WARNING(f"{os.path.dirname(_path):s} does not exist. CSV was not saved.")

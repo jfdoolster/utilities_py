@@ -7,12 +7,17 @@ import matplotlib.pyplot as plt
 from itertools import cycle
 from log_utils import WARNING, INFO
 
-def set_custom_rcparams(grid=True):
+def set_custom_rcparams():
     """
     custom rcparams
     """
-    plt.rcParams['axes.grid'] = grid
+    ## Set the grid info
+    plt.rcParams['axes.grid']
+    plt.rcParams['grid.alpha'] = 0.3
+    plt.rcParams['axes.axisbelow'] = True
+    # Set inverse colorscheme
     plt.rcParams['image.cmap'] = 'viridis_r'
+    ## Set the global fontsize
     plt.rc('font', size=12)
     ## Set the axes title font size
     plt.rc('axes', titlesize=16)

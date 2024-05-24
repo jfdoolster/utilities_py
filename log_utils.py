@@ -17,7 +17,7 @@ def escape_ansi(line):
     ansi_escape =re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
     return ansi_escape.sub('', line)
 
-def DISPLAY(hdr:str, msg:str, show_func:bool, slen=6):
+def DISPLAY(hdr:str, msg:str, show_func:bool, slen=6, newline:bool=False):
     while len(hdr) < slen+1:
         hdr+=' '
     if len(hdr) > slen:
@@ -39,14 +39,31 @@ def DISPLAY(hdr:str, msg:str, show_func:bool, slen=6):
         if (stack_func.lower() not in ['<module>']):
             FNAME = "["+bcolors.BOLD  + f"{stack_func:s}()"+ bcolors.ENDC+"]"
     PRINT = f"{HDR:s} {FNAME:s} {msg:s}"
+    if newline:
+        if PRINT[-1] != '\n': PRINT = PRINT + "\n"
     print(PRINT)
     return escape_ansi(PRINT)
 
-def INFO(msg:str="", hdr:str='INFO', show_func:bool=False):
+
+def SEPERATOR(msg:str="", msg_len=50):
+    if len(msg) > msg_len:
+        msg=msg[:msg_len]
+    if (len(msg) % 2) != 0:
+        msg += ' '
+
+    msg = f"{bcolors.BOLD} {msg} {bcolors.ENDC}"
+    while len(msg) < 60:
+        msg = f"#{msg}#"
+    print(msg)
+    return escape_ansi(msg)
+
+def INFO(msg:str="", hdr:str='INFO', show_func:bool=False, newline:bool=False):
+    if newline:
+        if msg[-1] != '\n': msg = msg + "\n"
     return DISPLAY(hdr, msg, show_func=show_func)
 
-def WARNING(msg:str="", show_func:bool=True):
-    return DISPLAY('WARN', msg, show_func=show_func)
+def WARNING(msg:str="", show_func:bool=True, newline:bool=False):
+    return DISPLAY('WARN', msg, show_func=show_func, newline=newline)
 
 def ERROR(msg:str="", show_func:bool=True, force_exit:bool=True):
     s = DISPLAY('FAIL', msg, show_func=show_func)
@@ -56,6 +73,6 @@ def ERROR(msg:str="", show_func:bool=True, force_exit:bool=True):
     return s
 
 def SUCCESS(msg:str="", show_func:bool=False, newline:bool=True):
-    if newline:
-        if msg[-1] != '\n': msg = msg + "\n"
-    return DISPLAY('PASS', msg, show_func=show_func)
+    #if newline:
+    #    if msg[-1] != '\n': msg = msg + "\n"
+    return DISPLAY('PASS', msg, show_func=show_func, newline=newline)
