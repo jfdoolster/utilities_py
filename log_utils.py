@@ -45,14 +45,15 @@ def DISPLAY(hdr:str, msg:str, show_func:bool, slen=6, newline:bool=False):
     return escape_ansi(PRINT)
 
 
-def SEPERATOR(msg:str="", msg_len=50):
+def SEPERATOR(msg:str="", msg_len=60):
+    msg=str(msg)
     if len(msg) > msg_len:
         msg=str(msg[:msg_len])
     if (len(msg) % 2) != 0:
         msg=str(msg)+' '
 
     msg = f"{bcolors.BOLD} {msg} {bcolors.ENDC}"
-    while len(msg) < 60:
+    while len(msg) < 80:
         msg = f"#{msg}#"
     print(msg)
     return escape_ansi(msg)

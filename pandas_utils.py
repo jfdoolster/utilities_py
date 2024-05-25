@@ -6,7 +6,7 @@ if syspath not in sys.path:
 
 import pandas as pd
 from log_utils import WARNING, INFO
-from fileio_utils import absolute_path
+from fileio_utils import absolute_path, unix_path
 
 def df2csv(df0: pd.DataFrame, csv_path: str, display=True, float_format=None) -> str:
     _path = absolute_path(csv_path)
@@ -16,7 +16,7 @@ def df2csv(df0: pd.DataFrame, csv_path: str, display=True, float_format=None) ->
         return _path
     df0.to_csv(_path, index=False, float_format=float_format)
     if display:
-        INFO(f"{_path:s}", hdr='CSV', show_func=False)
+        INFO(f"{unix_path(_path):s}", hdr='CSV', show_func=False)
     return _path
 
 def df2print(df0:pd.DataFrame, precision=2):
