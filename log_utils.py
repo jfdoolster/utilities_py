@@ -47,9 +47,9 @@ def DISPLAY(hdr:str, msg:str, show_func:bool, slen=6, newline:bool=False):
 
 def SEPERATOR(msg:str="", msg_len=50):
     if len(msg) > msg_len:
-        msg=msg[:msg_len]
+        msg=str(msg[:msg_len])
     if (len(msg) % 2) != 0:
-        msg += ' '
+        msg=str(msg)+' '
 
     msg = f"{bcolors.BOLD} {msg} {bcolors.ENDC}"
     while len(msg) < 60:

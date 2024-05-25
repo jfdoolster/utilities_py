@@ -22,5 +22,5 @@ def df2csv(df0: pd.DataFrame, csv_path: str, display=True, float_format=None) ->
 def df2print(df0:pd.DataFrame, precision=2):
     og = pd.get_option('display.precision')
     pd.set_option('display.precision', precision)
-    print(df0)
+    print(); print(df0); print()
     pd.set_option('display.precision', og)

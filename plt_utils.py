@@ -6,6 +6,7 @@ if syspath not in sys.path:
 import matplotlib.pyplot as plt
 from itertools import cycle
 from log_utils import WARNING, INFO
+from fileio_utils import absolute_path, unix_path
 
 def set_custom_rcparams():
     plt.rcParams['axes.grid'] = True
@@ -43,14 +44,14 @@ def linestyle_cycler():
     ])
 
 def fig2png(fig:plt.Figure, png_path:str, display:bool=True):
-    _path = os.path.abspath(png_path).replace(os.sep, '/')
+    _path = absolute_path(png_path)
     _path = f"{os.path.splitext(_path)[0]:s}.png"
     if not os.path.isdir(os.path.dirname(_path)):
         WARNING(f"{os.path.dirname(_path):s} does not exist. PNG was not saved.")
         return _path
     fig.savefig(_path, format='png')
     if display:
-        INFO(f"{_path:s}", hdr="PNG", show_func=False)
+        INFO(f"{unix_path(_path):s}", hdr="PNG", show_func=False)
     return _path
 
 
