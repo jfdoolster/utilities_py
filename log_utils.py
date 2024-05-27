@@ -40,8 +40,10 @@ def DISPLAY(hdr:str, msg:str, show_func:bool, slen=6, newline:bool=False):
         if (stack_func.lower() not in ['<module>']):
             FNAME = "["+bcolors.BOLD  + f"{stack_func:s}()"+ bcolors.ENDC+"]"
     PRINT = f"{HDR:s} {FNAME:s} {msg:s}"
+    while PRINT[-1] in ['\n']:
+        PRINT = PRINT[:-1]
     if newline:
-        if PRINT[-1] != '\n': PRINT = PRINT + "\n"
+        PRINT = PRINT + "\n"
     print(PRINT)
     return escape_ansi(PRINT)
 

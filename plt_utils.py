@@ -8,11 +8,12 @@ from itertools import cycle
 from log_utils import WARNING, INFO
 from fileio_utils import absolute_path, unix_path
 
-def set_custom_rcparams():
+def set_custom_rcparams(reverse_cmap:bool=False):
     plt.rcParams['axes.grid'] = True
     plt.rcParams['grid.alpha'] = 0.3
     plt.rcParams['axes.axisbelow'] = True
-    #plt.rcParams['image.cmap'] = 'viridis_r'
+    plt.rcParams['image.cmap'] = 'viridis'
+    if reverse_cmap: plt.rcParams['image.cmap'] = 'viridis_r'
     plt.rc('font', size=12)
     plt.rc('figure', titlesize=16)
     plt.rc('figure', labelsize=14)
