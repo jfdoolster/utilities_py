@@ -1,13 +1,20 @@
 import sys
+import inspect
 
-def prompt_user_continue(msg=str or None, exit_msg=""):
-    if msg not in [None, ""]: print(f"{msg}")
-    res = input(f"Continue? (y/[n]) ")
-    if res.lower() not in ['y', 'yes']:
-        if exit_msg not in [None, ""]: print(f"{exit_msg}")
-        print("Exiting...")
+def prompt_user_continue(msg:str="", exit_msg:str="", default_yes:bool=False):
+    yes_no = '(y/[n])'
+    continue_values = ['y', 'yes']
+    if default_yes:
+        yes_no = '([y]/n)'
+        continue_values.append('')
+
+    if msg.split() not in [""]: msg = f"{msg:s}\n"
+    res = input(f"{msg}Continue? {yes_no:s} ")
+
+    if res.lower() not in continue_values:
+        if exit_msg.split() not in [""]: exit_msg = f"{exit_msg:s}\n"
+        print(f"{exit_msg:s}Exiting...")
         sys.exit()
 
-
-if __name__ == "__main__":
-    print(__file__)
+def get_function_name():
+    return inspect.stack()[1].function
