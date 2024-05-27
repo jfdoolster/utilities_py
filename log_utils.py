@@ -20,6 +20,7 @@ def escape_ansi(line):
 def DISPLAY(hdr:str, msg:str, show_func:bool, slen=6, newline:bool=False):
     while len(hdr) < slen+1:
         hdr+=' '
+
     if len(hdr) > slen:
         hdr = hdr[:slen]
 
@@ -44,8 +45,7 @@ def DISPLAY(hdr:str, msg:str, show_func:bool, slen=6, newline:bool=False):
     print(PRINT)
     return escape_ansi(PRINT)
 
-
-def SEPERATOR(msg:str="", msg_len=60):
+def SEPERATOR(msg:str="", msg_len=60, sep_len=80):
     msg=str(msg)
     if len(msg) > msg_len:
         msg=str(msg[:msg_len])
@@ -53,15 +53,15 @@ def SEPERATOR(msg:str="", msg_len=60):
         msg=str(msg)+' '
 
     msg = f"{bcolors.BOLD} {msg} {bcolors.ENDC}"
-    while len(msg) < 80:
+    while len(msg) < sep_len:
         msg = f"#{msg}#"
     print(msg)
     return escape_ansi(msg)
 
 def INFO(msg:str="", hdr:str='INFO', show_func:bool=False, newline:bool=False):
-    if newline:
-        if msg[-1] != '\n': msg = msg + "\n"
-    return DISPLAY(hdr, msg, show_func=show_func)
+    #if newline:
+    #    if msg[-1] != '\n': msg = msg + "\n"
+    return DISPLAY(hdr, msg, show_func=show_func, newline=newline)
 
 def WARNING(msg:str="", show_func:bool=True, newline:bool=False):
     return DISPLAY('WARN', msg, show_func=show_func, newline=newline)
@@ -74,6 +74,4 @@ def ERROR(msg:str="", show_func:bool=True, force_exit:bool=True):
     return s
 
 def SUCCESS(msg:str="", show_func:bool=False, newline:bool=True):
-    #if newline:
-    #    if msg[-1] != '\n': msg = msg + "\n"
     return DISPLAY('PASS', msg, show_func=show_func, newline=newline)
