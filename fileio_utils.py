@@ -36,12 +36,12 @@ def get_directory_files(directory: str, wildcard='*', unix_style=True):
     return files
 
 if __name__ == "__main__":
-    path = '../../Documents/jfd_vault'
+    path = '../../Documents/'
     print(unix_path(path))
     print(absolute_path(path, True))
     print(get_directory_files(path, wildcard="*"))
     print()
-    path = '$HOME/Documents/jfd_vault'
+    path = '$HOME/Documents/'
     print(unix_path(path))
     print(absolute_path(path, True))
     print(get_directory_files(path, wildcard="*"))
