@@ -14,3 +14,13 @@ def quadratic_equ(a: float,b: float,c: float): # pylint: disable=invalid-name
     root2 = num2 / den
 
     return root1, root2
+
+
+def moving_average(arr: np.ndarray, n=3):
+    ret = np.cumsum(arr, dtype=float)
+    if n < 1:
+        return arr
+    ret[n:] = ret[n:] - ret[:-n]
+    nan_arr = np.empty((n-1,))
+    nan_arr[:] = np.nan
+    return np.hstack((nan_arr, np.array(ret[n-1:]/n)))
