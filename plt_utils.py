@@ -8,7 +8,7 @@ from itertools import cycle
 from log_utils import WARNING, INFO
 from fileio_utils import absolute_path, unix_path
 
-def set_custom_rcparams(reverse_cmap:bool=False):
+def set_custom_rcparams(reverse_cmap:bool=False) -> None:
     plt.rcParams['axes.grid'] = True
     plt.rcParams['grid.alpha'] = 0.3
     plt.rcParams['axes.axisbelow'] = True
@@ -44,7 +44,7 @@ def linestyle_cycler():
         ((0, (6,1, 2,1, 2,1))),
     ])
 
-def fig2png(fig:plt.Figure, png_path:str, display:bool=True):
+def fig2png(fig:plt.Figure, png_path:str, display:bool=True) -> str:
     _path = absolute_path(png_path)
     _path = f"{os.path.splitext(_path)[0]:s}.png"
     if not os.path.isdir(os.path.dirname(_path)):

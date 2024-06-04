@@ -2,7 +2,7 @@ import datetime
 import numpy as np
 import pandas as pd
 
-def show_timedelta(time_initial:str, time_final: str, ret='sec'):
+def show_timedelta(time_initial:str, time_final:str) -> float:
     t0 = pd.to_datetime(time_initial)
     tf = pd.to_datetime(time_final)
 
@@ -23,10 +23,10 @@ def show_timedelta(time_initial:str, time_final: str, ret='sec'):
 
     return seconds
 
-def current_timestamp_str():
+def current_timestamp_str() -> str:
     return str(datetime.datetime.now())
 
-def shift_timestamp_forward(df0: pd.DataFrame, seconds=0, minutes=0, hours=0, days=0, timestamp_col='Timestamp'):
+def shift_timestamp_forward(df0:pd.DataFrame, seconds:float=0, minutes:float=0, hours:float=0, days:float=0, timestamp_col:str='Timestamp') -> pd.DataFrame:
     df = df0.copy()
     df[timestamp_col] = df[timestamp_col] + \
                         pd.to_timedelta(seconds, unit='sec') + \

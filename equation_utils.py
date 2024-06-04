@@ -1,10 +1,10 @@
 import numpy as np
 
-def quadratic_equ(a: float,b: float,c: float): # pylint: disable=invalid-name
+def quadratic_equ(a:float, b:float, c:float) -> tuple[float, float]:
     """
     solve for roots of quadratic equation with constants a, b, c
     """
-    d = b**2 - 4 * a * c # pylint: disable=invalid-name
+    d = b**2 - 4 * a * c
 
     num1 = -b + np.sqrt(d)
     num2 = -b - np.sqrt(d)
@@ -16,7 +16,7 @@ def quadratic_equ(a: float,b: float,c: float): # pylint: disable=invalid-name
     return root1, root2
 
 
-def moving_average(arr: np.ndarray, n=3):
+def moving_average(arr:np.ndarray, n:int=3) -> np.ndarray:
     ret = np.cumsum(arr, dtype=float)
     if n < 1:
         return arr

@@ -25,7 +25,7 @@ def absolute_path(path: str, unix_style=True) -> str:
         return unix_path(_path, shorten=False)
     return _path
 
-def get_directory_files(directory: str, wildcard='*', unix_style=True):
+def get_directory_files(directory: str, wildcard='*', unix_style=True) -> list[str]:
     dir = absolute_path(directory)
     if not os.path.isdir(dir):
         print(f"{dir:s} does not exist")

@@ -1,7 +1,7 @@
 import sys
 import inspect
 
-def prompt_user_continue(msg:str="", exit_msg:str="", default_yes:bool=False):
+def prompt_user_continue(msg:str="", exit_msg:str="", default_yes:bool=False) -> None:
     yes_no = '(y/[n])'
     continue_values = ['y', 'yes']
     if default_yes:
@@ -16,5 +16,5 @@ def prompt_user_continue(msg:str="", exit_msg:str="", default_yes:bool=False):
         print(f"{exit_msg:s}Exiting...")
         sys.exit()
 
-def get_function_name():
-    return inspect.stack()[1].function
+def get_function_name(stack_lvl:int=1) -> str:
+    return inspect.stack()[stack_lvl].function

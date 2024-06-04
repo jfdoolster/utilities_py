@@ -1,6 +1,6 @@
 import numpy as np
 
-def polynomial_regression(x_arr: np.ndarray, y_arr: np.ndarray, power=1, force_zero=False, y_offset=0.0):
+def polynomial_regression(x_arr:np.ndarray, y_arr:np.ndarray, power:int=1, force_zero:bool=False, y_offset:float=0.0) -> tuple[np.ndarray, np.ndarray]:
 
     x_arr.shape = (len(x_arr),)
     y_arr.shape = (len(y_arr),1)
@@ -26,32 +26,20 @@ def polynomial_regression(x_arr: np.ndarray, y_arr: np.ndarray, power=1, force_z
     xx_inv = np.linalg.inv(x_cross_xprime)
     xx_cross_xp = np.matmul(xx_inv, x_mat_prime)
 
-    beta = np.matmul(xx_cross_xp, y_arr - y_offset)
+    beta:np.ndarray = np.matmul(xx_cross_xp, y_arr - y_offset)
     beta.shape = (len(beta), 1)
 
-    yhat = np.matmul(x_mat, beta) + y_offset
+    yhat:np.ndarray = np.matmul(x_mat, beta) + y_offset
 
     if force_zero:
         beta = np.insert(beta, 0, 0, axis=0)
 
     return beta, yhat
 
-def calc_Rsquared(y_data: np.ndarray, y_hat:np.ndarray):
+def calc_Rsquared(y_data: np.ndarray, y_hat:np.ndarray) -> float:
     # https://en.wikipedia.org/wiki/Partition_of_sums_of_squares
     y_bar:float = np.sum(y_data)/len(y_data)
     ssreg:float = np.sum((y_hat  - y_bar)**2)
     ssres:float = np.sum((y_hat - y_bar)**2)
     sstot:float = np.sum((y_data - y_bar)**2)
     return float((ssreg/sstot))
-
-
-    #ESS:float = np.sum(np.square(y_hat  - y_bar))
-    #TSS:float = np.sum(np.square(y_data - y_bar))
-    #RSS:float = np.sum(np.square(y_data - y_hat))
-    #Stot:float = ESS + RSS
-    #Sres:float = RSS
-    #print(TSS, Stot)
-    #R2:float = 1 - (Sres/Stot)
-    #return R2
-
-

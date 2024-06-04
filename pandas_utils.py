@@ -19,7 +19,7 @@ def df2csv(df0: pd.DataFrame, csv_path: str, display=True, float_format=None) ->
         INFO(f"{unix_path(_path):s}", hdr='CSV', show_func=False)
     return _path
 
-def df2print(df0:pd.DataFrame, precision=2, latex:bool=False):
+def df2print(df0:pd.DataFrame, precision=2, latex:bool=False) -> None:
     og = pd.get_option('display.precision')
     pd.set_option('display.precision', precision)
     df = df0.copy()
