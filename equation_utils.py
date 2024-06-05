@@ -17,9 +17,8 @@ def quadratic_equ(a:float, b:float, c:float) -> tuple[float, float]:
 
 
 def moving_average(arr:np.ndarray, n:int=3) -> np.ndarray:
+    if n < 1: return arr
     ret = np.cumsum(arr, dtype=float)
-    if n < 1:
-        return arr
     ret[n:] = ret[n:] - ret[:-n]
     nan_arr = np.empty((n-1,))
     nan_arr[:] = np.nan
