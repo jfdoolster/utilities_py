@@ -58,8 +58,6 @@ def SEPERATOR(msg:str="", msg_len=60, sep_len=80) -> str:
     return escape_ansi(msg)
 
 def INFO(msg:str="", hdr:str='INFO', show_func:bool=False, newline:bool=False) -> str:
-    #if newline:
-    #    if msg[-1] != '\n': msg = msg + "\n"
     return DISPLAY(hdr, msg, show_func=show_func, newline=newline)
 
 def WARNING(msg:str="", show_func:bool=True, newline:bool=False):
