@@ -12,6 +12,7 @@ from utilities_py.pandas_utils import *
 from utilities_py.plt_utils import *
 from utilities_py.polynomial_utils import *
 from utilities_py.time_utils import *
+from utilities_py.statistics import *
 
 if __name__ == "__main__":
     print(__file__)
