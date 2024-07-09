@@ -26,7 +26,7 @@ def between_times(df0:pd.DataFrame, start="00:00:00", end="23:59:59", start_date
     #TODO: this is in datset_types. rerun main
     ts_convert = {
         'MDT':'US/Mountain',
-        'MST':'US/Phoenix',
+        #'MST':'US/Phoenix',
     }
     if tz in ts_convert.keys():
         tz = ts_convert[tz]
