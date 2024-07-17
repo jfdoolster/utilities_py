@@ -103,3 +103,9 @@ def align_yaxis(ax1:plt.Axes, ax2:plt.Axes, v1:float=0.0, v2:float=0.0):
     ax2.set_ylim(miny+dy, maxy+dy)
 
 
+
+def set_fig_title(fig: plt.Figure, title:str, tight_layout:bool=True):
+    fig.suptitle(title)
+    fig.canvas.manager.set_window_title(title)
+    if tight_layout:
+        fig.tight_layout()
