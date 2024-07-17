@@ -4,6 +4,8 @@ syspath = os.path.abspath(os.path.join(os.path.dirname(__file__), '..')).replace
 if syspath not in sys.path:
     sys.path.append(syspath)
 
+
+from utilities_py.arg_utils import *
 from utilities_py.equation_utils import *
 from utilities_py.fileio_utils import *
 from utilities_py.log_utils import *
