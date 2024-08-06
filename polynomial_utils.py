@@ -43,3 +43,23 @@ def calc_Rsquared(y_data: np.ndarray, y_hat:np.ndarray) -> float:
     ssres:float = np.sum((y_hat - y_bar)**2)
     sstot:float = np.sum((y_data - y_bar)**2)
     return float((ssreg/sstot))
+
+def polynomial_new(x:np.ndarray, y:np.ndarray, degree:int):
+    x.shape = (len(x),)
+
+    if y.shape[0] != x.shape[0]:
+        print(f"ERROR: incompatibile arrays! (x.shape={x.shape}, y.shape={y.shape})")
+
+    #print(f"(x.shape={x.shape}, y.shape={y.shape})")
+
+    p = np.polyfit(x, y, degree)
+
+    xs = np.linspace(min(x), max(x), num=len(x))
+
+
+
+
+
+
+
+
